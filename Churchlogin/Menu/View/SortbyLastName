@@ -1,0 +1,23 @@
+<?php
+    include_once 'process.php';
+?>
+<html>
+<head>
+    <title>Address sort/title>
+</head>
+<body>
+    <h2>Sort by Last Name</h2>
+<?php 
+    $sql = "SELECT P.* && PA.*, E.EmployeeID, E.DateHired,E.Title,E.Resume 
+    FROM Person P, Employee E WHERE E.PersonID = P.PersonID ORDER BY P.LastName DESC;";
+    $result = mysqli_query($conn,$sql);
+    $resultCheck = mysqli_num_rows($result);
+    
+    if($resultCheck >0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "Last Name:".$row['LastName']."&nbsp"."First Name:".$row['FirstName'] . "&nbsp"."Employee ID:".$row['EmployeeID']."&nbsp"."Title:". $row['Title']. "<br>". "<br>";
+            }
+    }
+?>
+</body>
+</html>
